@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブラウザゲーム操作</title>
+<style>
+  body { display:flex; flex-direction:column; align-items:center; font-family:sans-serif; margin:0; }
+  input, button { font-size:16px; margin:5px; padding:5px; }
+  iframe { width: 100%; height: 60vh; border: 1px solid #333; margin-top:10px; }
+  .row { display:flex; margin:5px; }
+  .arrow { width:60px; height:60px; font-size:24px; margin:5px; }
+</style>
+</head>
+<body>
+<h2>ゲーム操作用ブラウザ</h2>
+<input type="text" id="url" placeholder="ゲームのURLを入力">
+<button onclick="loadURL()">開く</button>
+
+<iframe id="gameFrame"></iframe>
+
+<div class="row">
+  <button class="arrow" onclick="sendKey('ArrowUp')">↑</button>
+</div>
+<div class="row">
+  <button class="arrow" onclick="sendKey('ArrowLeft')">←</button>
+  <button class="arrow" onclick="sendKey('ArrowDown')">↓</button>
+  <button class="arrow" onclick="sendKey('ArrowRight')">→</button>
+</div>
+
+<script>
+const iframe = document.getElementById('gameFrame');
+
+function loadURL() {
+  const url = document.getElementById('url').value;
+  iframe.src = url;
+}
+
+// キーイベント送信（iframe内に送るのは同一オリジンのみ）
+function sendKey(key) {
+  try {
+    const event = new KeyboardEvent('keydown', { key: key, bubbles: true });
+    iframe.contentWindow.document.activeElement.dispatchEvent(event);
+  } catch (e) {
+    alert("このサイトには矢印操作を送れません（同一オリジン制約）");
+  }
+}
+</script>
+</body>
+</html>
