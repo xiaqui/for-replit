@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>会社名 / 個人制作会社 - プロフィール & プロダクツ</title>
+  <meta name="description" content="個人制作会社のプロフィール、プロダクツ、外部ブログとXの引用を掲載。" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="会社名 / 個人制作会社" />
+  <meta property="og:description" content="プロフィール、プロダクツ、ブログとXの引用。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <!-- 任意: 画像を用意できるなら差し替え -->
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1200'%20height='630'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23111'/%3E%3Ctext%20x='50%25'%20y='50%25'%20dominant-baseline='middle'%20text-anchor='middle'%20fill='%23fff'%20font-size='64'%20font-family='system-ui,-apple-system,Segoe%20UI,Roboto'%3ECompany%20Name%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --faint: rgba(255,255,255,.55);
+      --line: rgba(255,255,255,.14);
+      --brand: #7dd3fc;
+      --brand2: #a78bfa;
+      --ok: #34d399;
+      --shadow: 0 12px 40px rgba(0,0,0,.45);
+      --r: 16px;
+      --max: 1040px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f8fafc;
+        --panel: rgba(2,6,23,.05);
+        --panel2: rgba(2,6,23,.07);
+        --text: rgba(2,6,23,.92);
+        --muted: rgba(2,6,23,.72);
+        --faint: rgba(2,6,23,.56);
+        --line: rgba(2,6,23,.14);
+        --shadow: 0 10px 30px rgba(2,6,23,.12);
+      }
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(125,211,252,.18), transparent 55%),
+        radial-gradient(900px 600px at 90% 15%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(800px 500px at 50% 100%, rgba(52,211,153,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{ color:inherit; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 24px 18px 60px; }
+
+    /* Top bar */
+    .top{
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .top .inner{
+      max-width:var(--max); margin:0 auto;
+      padding: 10px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      font-weight: 700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .logo{
+      width:28px; height:28px; border-radius: 10px;
+      background:
+        radial-gradient(circle at 30% 30%, var(--brand), transparent 55%),
+        radial-gradient(circle at 80% 20%, var(--brand2), transparent 55%),
+        radial-gradient(circle at 20% 90%, var(--ok), transparent 55%),
+        color-mix(in srgb, var(--panel2) 65%, transparent);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    nav{
+      display:flex; gap: 10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      font-size: 13px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid transparent;
+      color: var(--muted);
+    }
+    nav a:hover{
+      border-color: var(--line);
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 34px 0 10px;
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+    .card{
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{
+      padding: 22px 20px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size: 12px; color: var(--muted);
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 55%, transparent);
+      padding: 6px 10px; border-radius: 999px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 15%, transparent);
+    }
+    h1{
+      margin: 12px 0 8px;
+      font-size: clamp(26px, 3.3vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 60ch;
+    }
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      font-weight: 650;
+      font-size: 13.5px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 75%, transparent);
+    }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+      background:
+        radial-gradient(120px 80px at 20% 0%, color-mix(in srgb, var(--brand) 45%, transparent), transparent 60%),
+        radial-gradient(130px 90px at 90% 40%, color-mix(in srgb, var(--brand2) 35%, transparent), transparent 60%),
+        color-mix(in srgb, var(--panel2) 75%, transparent);
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); }
+
+    .hero-side{
+      padding: 18px 16px;
+    }
+    .meta{
+      display:grid; gap: 10px;
+    }
+    .meta .row{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px 10px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--panel2) 65%, transparent);
+      border: 1px solid var(--line);
+    }
+    .meta .k{ font-size: 12px; color: var(--faint); min-width: 72px; }
+    .meta .v{ font-size: 13px; color: var(--muted); }
+
+    /* Sections */
+    section{
+      margin-top: 22px;
+      scroll-margin-top: 68px;
+    }
+    .section-head{
+      display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+      margin: 10px 0;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:-.2px;
+    }
+    .section-head p{
+      margin:0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Products grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .product{
+      padding: 14px 14px 12px;
+    }
+    .product .topline{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 6px;
+    }
+    .tag{
+      font-size: 11px;
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      white-space:nowrap;
+    }
+    .product h3{
+      margin: 8px 0 6px;
+      font-size: 15px;
+      letter-spacing: -.2px;
+    }
+    .product p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .product .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+    .product .links a{
+      color: var(--text);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 65%, transparent);
+    }
+    .product .links a:hover{ transform: translateY(-1px); }
+
+    /* Quotes */
+    .two{
+      display:grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 860px){ .two{ grid-template-columns: 1fr; } }
+
+    .quote{
+      padding: 14px 14px 10px;
+    }
+    .quote blockquote{
+      margin: 0;
+      padding-left: 12px;
+      border-left: 3px solid color-mix(in srgb, var(--brand) 45%, var(--line));
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .quote footer{
+      margin-top: 10px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      color: var(--faint);
+      font-size: 12px;
+    }
+    .quote a{
+      text-decoration:none;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      display:flex; gap:10px; justify-content:space-between; flex-wrap:wrap;
+    }
+    .small{ color: var(--faint); }
+
+    /* Accessibility */
+    :focus-visible{
+      outline: 3px solid color-mix(in srgb, var(--brand) 55%, transparent);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+  </style>
+
+  <!-- 構造化データ（任意） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "会社名（個人制作会社）",
+    "url": "https://example.com/",
+    "sameAs": [
+      "https://x.com/your_handle",
+      "https://yourblog.example.com/"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header class="top">
+    <div class="inner">
+      <a class="brand" href="#top" aria-label="トップへ">
+        <span class="logo" aria-hidden="true"></span>
+        <span>会社名</span>
+      </a>
+      <nav aria-label="ページ内ナビゲーション">
+        <a href="#about">会社概要</a>
+        <a href="#products">プロダクツ</a>
+        <a href="#links">リンク</a>
+        <a href="#quotes">引用</a>
+        <a href="#contact">連絡</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-main">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> 個人制作会社 / ソフトウェア・制作</div>
+        <h1>作る。速く。丁寧に。</h1>
+        <p class="lead">
+          ここに「何を作る会社か」を一文で。例：Webアプリ、ツール、執筆、UI実装、業務自動化など。
+          個人でも、継続運用と品質を重視して提供します。
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#products">プロダクツを見る</a>
+          <a class="btn" href="#contact">問い合わせ</a>
+          <a class="btn" href="https://yourblog.example.com/" target="_blank" rel="noopener">ブログ</a>
+          <a class="btn" href="https://x.com/your_handle" target="_blank" rel="noopener">X</a>
+        </div>
+      </div>
+
+      <aside class="card hero-side" aria-label="基本情報">
+        <div class="meta">
+          <div class="row">
+            <div class="k">屋号</div>
+            <div class="v">会社名（個人制作会社）</div>
+          </div>
+          <div class="row">
+            <div class="k">事業</div>
+            <div class="v">プロダクト開発 / 受託開発 / 研究・執筆 など</div>
+          </div>
+          <div class="row">
+            <div class="k">拠点</div>
+            <div class="v">Japan（任意で市区町村まで）</div>
+          </div>
+          <div class="row">
+            <div class="k">連絡</div>
+            <div class="v"><a href="mailto:hello@example.com">hello@example.com</a></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head">
+        <h2>会社概要</h2>
+        <p>短く・読みやすく・意思決定しやすく</p>
+      </div>
+      <div class="card" style="padding:16px 16px 14px;">
+        <p style="margin:0;color:var(--muted);font-size:14px;max-width:78ch;">
+          ここにプロフィール。例：何年やってきたか / 得意領域 / 価値観 / 仕事の進め方。
+          1ファイル運用だと更新しやすいので「年表」より「今できること」「実績リンク」に寄せるのが楽です。
+        </p>
+        <ul style="margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:13.5px;">
+          <li>強み：要件整理 → 試作 → 反復改善（小さく早く出す）</li>
+          <li>領域：Web / 自動化 / CLI / ドキュメント整備 など</li>
+          <li>対応：小規模案件、継続改善、技術顧問（任意）</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="section-head">
+        <h2>プロダクツ</h2>
+        <p>リンク先が主。ここは「選びやすい要約」</p>
+      </div>
+
+      <div class="grid">
+        <article class="card product">
+          <div class="topline">
+            <span class="tag">SaaS / App</span>
+            <span class="tag" title="開発状況">公開中</span>
+          </div>
+          <h3>プロダクト名 A</h3>
+          <p>一文説明。誰の、どんな課題を、どう解決するか。</p>
+          <div class="links">
+            <a href="https://example.com/product-a" target="_blank" rel="noopener">サイト</a>
+            <a href="https://github.com/your/repo-a" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </article>
+
+        <article class="card product">
+          <div class="topline">
+            <span class="tag">Tool / OSS</span>
+            <span class="tag">β</span>
+          </div>
+          <h3>プロダクト名 B</h3>
+          <p>一文説明。例：開発者向けユーティリティ、CLI、拡張機能など。</p>
+          <div class="links">
+            <a href="https://github.com/your/repo-b" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://example.com/docs-b" target="_blank" rel="noopener">Docs</a>
+          </div>
+        </article>
+
+        <article class="card product">
+          <div class="topline">
+            <span class="tag">Content</span>
+            <span class="tag">継続</span>
+          </div>
+          <h3>プロダクト名 C（記事・連載など）</h3>
+          <p>一文説明。例：技術記事、連載、書籍、講演資料。</p>
+          <div class="links">
+            <a href="https://yourblog.example.com/" target="_blank" rel="noopener">ブログ</a>
+            <a href="https://example.com/press" target="_blank" rel="noopener">掲載</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section id="links">
+      <div class="section-head">
+        <h2>リンク</h2>
+        <p>外部発信・実績・窓口</p>
+      </div>
+
+      <div class="two">
+        <div class="card" style="padding:14px 14px 12px;">
+          <h3 style="margin:0 0 6px;font-size:14px;">外部ブログ</h3>
+          <p style="margin:0 0 10px;color:var(--muted);font-size:13px;">
+            長文や技術詳細はブログに集約。
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn" href="https://yourblog.example.com/" target="_blank" rel="noopener">ブログを見る</a>
+            <a class="btn" href="https://yourblog.example.com/about" target="_blank" rel="noopener">著者紹介</a>
+          </div>
+        </div>
+
+        <div class="card" style="padding:14px 14px 12px;">
+          <h3 style="margin:0 0 6px;font-size:14px;">X</h3>
+          <p style="margin:0 0 10px;color:var(--muted);font-size:13px;">
+            近況、短文のメモ、更新告知。
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn" href="https://x.com/your_handle" target="_blank" rel="noopener">@your_handle</a>
+            <a class="btn" href="#quotes">引用へ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section id="quotes">
+      <div class="section-head">
+        <h2>外部ブログとXの引用</h2>
+        <p>静的ページなら「手動抜粋」か「埋め込み（外部JS）」</p>
+      </div>
+
+      <div class="two">
+        <!-- ブログ引用（手動） -->
+        <article class="card quote">
+          <blockquote>
+            「ブログ記事から2〜4行ほどを抜粋してここに。読みたくなる“結論”や“主張”が良い。」
+          </blockquote>
+          <footer>
+            <span>出典：ブログ記事タイトル（YYYY-MM-DD）</span>
+            <a href="https://yourblog.example.com/post-1" target="_blank" rel="noopener">記事を読む</a>
+          </footer>
+        </article>
+
+        <!-- X引用（手動） -->
+        <article class="card quote">
+          <blockquote>
+            「Xの投稿を手動で引用するなら、ここにテキストを貼って出典リンクを付ける。」
+          </blockquote>
+          <footer>
+            <span>出典：X（YYYY-MM-DD）</span>
+            <a href="https://x.com/your_handle/status/1234567890" target="_blank" rel="noopener">投稿を見る</a>
+          </footer>
+        </article>
+      </div>
+
+      <!-- Xの公式埋め込みを使う場合（外部JSが必要） -->
+      <details class="card" style="margin-top:12px;padding:12px 14px;">
+        <summary style="cursor:pointer;font-weight:650;">Xを“公式埋め込み”で表示する（任意）</summary>
+        <p style="margin:10px 0 8px;color:var(--muted);font-size:13px;">
+          これは静的ページでも可能ですが、外部スクリプト <code>platform.twitter.com/widgets.js</code> に依存します。
+        </p>
+        <div class="card" style="padding:12px;border-radius:12px;background:color-mix(in srgb, var(--panel2) 70%, transparent);">
+          <!-- 例：X埋め込み。statusのURLを差し替え -->
+          <blockquote class="twitter-tweet">
+            <a href="https://twitter.com/Interior/status/463440424141459456">https://twitter.com/Interior/status/463440424141459456</a>
+          </blockquote>
+        </div>
+      </details>
+      <!-- X埋め込みJS（上の公式埋め込みを使う場合だけ有効化） -->
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-head">
+        <h2>連絡</h2>
+        <p>静的1ファイルなら「mailto」が最短</p>
+      </div>
+
+      <div class="card" style="padding:16px 16px 14px;">
+        <p style="margin:0 0 10px;color:var(--muted);font-size:14px;">
+          連絡はメールが最も確実です。案件相談の場合は、概要・希望納期・予算感・連絡先を添えてください。
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn primary" href="mailto:hello@example.com?subject=%E3%80%90%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%80%91%E4%BB%B6%E5%90%8D&body=%E3%83%BB%E6%A6%82%E8%A6%81%0D%0A%E3%83%BB%E5%B8%8C%E6%9C%9B%E7%B4%8D%E6%9C%9F%0D%0A%E3%83%BB%E4%BA%88%E7%AE%97%E6%84%9F%0D%0A%E3%83%BB%E9%80%A3%E7%B5%A1%E5%85%88%0D%0A">メールで問い合わせ</a>
+          <a class="btn" href="#top">トップへ</a>
+        </div>
+        <p class="small" style="margin:10px 0 0;">
+          追加でフォームが必要なら、外部フォーム（Google Forms等）へのリンクが静的運用と相性が良いです。
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> 会社名. All rights reserved.</div>
+      <div class="small">Built as a single-file static site. Hosted on GitHub Pages.</div>
+    </footer>
+  </main>
+
+  <script>
+    // 年だけ自動。不要なら消してOK。
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
